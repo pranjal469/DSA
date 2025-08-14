@@ -1,32 +1,30 @@
 class Solution {
 public:
     int countCharacters(vector<string>& words, string chars) {
-        vector<int> charFreq(26, 0); // frequency of chars in 'chars'
-        for (char c : chars) {
-            charFreq[c - 'a']++;
+        vector< int> charcount(26,0);
+        for(char &ch : chars){
+            charcount[ch-'a']++;
         }
+        int result =0;
+        for(string &word : words){
+            vector<int> wordcount(26 ,0);
+            for(char &ch : word){
+                wordcount[ch-'a']++;
+            }
+        
 
-        int totalLength = 0;
-
-        for (string &word : words) {
-            vector<int> wordFreq(26, 0);
-            for (char c : word) {
-                wordFreq[c - 'a']++;
+        bool ok = true;
+        for(int i =0;i<26;i++){
+            if(wordcount[i]>charcount[i]){
+             ok = false;
+             break;
             }
 
-            bool canForm = true;
-            for (int i = 0; i < 26; i++) {
-                if (wordFreq[i] > charFreq[i]) {
-                    canForm = false;
-                    break;
-                }
-            }
-
-            if (canForm) {
-                totalLength += word.length();
-            }
         }
-
-        return totalLength;
+        if(ok == true){
+            result += word.length();
+        }
+    }
+        return result;
     }
 };
