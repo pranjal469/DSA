@@ -14,9 +14,6 @@ int operate(int a, int b,string op ){
         int b =0;
         int result =0;
         int n = tokens.size();
-        if(n == 1){
-            return stoi(tokens[0]);
-        }
          for(int i =0;i<n;i++){
             if(tokens[i]=="+" ||tokens[i]=="-"||tokens[i]=="/"||tokens[i]=="*"){
              a = st.top();
@@ -30,6 +27,6 @@ int operate(int a, int b,string op ){
                 st.push(stoi(tokens[i]));
             }
          }
-         return result;
+         return st.top();
     }
 };
